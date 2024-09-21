@@ -5,6 +5,8 @@ import dotenv from "dotenv";
 dotenv.config();
 const app = express();
 
+app.use(express.json()); //Parse the incoming request with JSON payload (body-parser)
+
 app.use("/api/auth", authRoutes);
 
 const PORT = 8000;
