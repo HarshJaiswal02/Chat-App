@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import authRoutes from "../backend/routes/auth.routes.js";
 import messageRoutes from "../backend/routes/message.routes.js";
-import userRoutes from "../backend/routes/auth.routes.js";
+import userRoutes from "../backend/routes/users.routes.js";
 
 import DbConnect from "./config/db.js";
 
@@ -15,7 +15,7 @@ app.use(express.json()); //Parse the incoming request with JSON payload (body-pa
 
 app.use("/api/auth", authRoutes);
 app.use("/api/message", messageRoutes);
-app.use("/api/", userRoutes);
+app.use("/api/users", userRoutes);
 
 const PORT = process.env.PORT || 8000;
 
