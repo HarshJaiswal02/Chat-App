@@ -1,15 +1,23 @@
 import express from "express";
-import authRoutes from "../backend/routes/auth.routes.js";
-import DbConnect from "./config/db.js";
 import dotenv from "dotenv";
+import cookieParser from "cookie-parser";
+import authRoutes from "../backend/routes/auth.routes.js";
+import messageRoutes from "../backend/routes/message.routes.js";
+import userRoutes from "../backend/routes/auth.routes.js";
+
+import DbConnect from "./config/db.js";
+
 dotenv.config();
 const app = express();
 
+app.use(cookieParser());
 app.use(express.json()); //Parse the incoming request with JSON payload (body-parser)
 
 app.use("/api/auth", authRoutes);
+app.use("/api/message", messageRoutes);
+app.use("/api/", userRoutes);
 
-const PORT = 8000;
+const PORT = process.env.PORT || 8000;
 
 DbConnect()
   .then(() => {
