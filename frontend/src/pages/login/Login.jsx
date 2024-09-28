@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const Login = () => {
   return (
     <>
@@ -80,9 +82,9 @@ const Login = () => {
             <div className="flex items-center justify-between">
               <p className="text-sm">
                 No account?{" "}
-                <a className="underline" href="#">
+                <Link className="underline" to={"/signup"}>
                   Signup
-                </a>
+                </Link>
               </p>
             </div>
             <button

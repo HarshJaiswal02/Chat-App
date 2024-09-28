@@ -1,6 +1,8 @@
+import { Link } from "react-router-dom";
 import GenderCheckbox from "./GenderCheckbox";
 
 const Signup = () => {
+  // const 
   return (
     <div className=" flex rounded backdrop-blur-sm bg-opacity-50 border border-gray-100 backdrop-filter">
       <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
@@ -157,9 +159,9 @@ const Signup = () => {
           <div className="flex items-center justify-between">
             <p className="text-sm">
               Already have account?{" "}
-              <a className="underline" href="#">
+              <Link className="underline" to={"/login"}>
                 Login
-              </a>
+              </Link>
             </p>
           </div>
           <button
