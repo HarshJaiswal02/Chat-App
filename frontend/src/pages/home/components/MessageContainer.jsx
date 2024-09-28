@@ -1,6 +1,6 @@
 import MessageInput from "../../../globalComponent/message/MessageInput";
 import Messages from "../../../globalComponent/message/Messages";
-import MessageSkeleton from "../../../globalComponent/skeleton/MessageSkeleton";
+// import MessageSkeleton from "../../../globalComponent/skeleton/MessageSkeleton";
 
 const MessageContainer = () => {
   return (
@@ -14,7 +14,7 @@ const MessageContainer = () => {
 
         <Messages />
         <MessageInput />
-        <MessageSkeleton />
+        {/* <MessageSkeleton /> */}
       </>
     </div>
   );
