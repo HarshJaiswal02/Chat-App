@@ -1,9 +1,22 @@
-import "./App.css";
+import Home from "./pages/home/Home";
+import Login from "./pages/login/Login";
+import Signup from "./pages/signup/Signup";
 
 function App() {
   return (
     <>
-      <h1 className="text-3xl font-bold underline">Frontend Of Chat - App</h1>
+      <div
+        style={{
+          backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../public/bg.png')`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+        className="h-screen max-w-screen flex justify-center items-center"
+      >
+        {/* <Login />  */}
+        {/* <Signup /> */}
+        <Home />
+      </div>
     </>
   );
 }

@@ -1,3 +1,7 @@
+/* import {bgImage} from '../assets/bg.png'; */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+body {
+  background: url("../public/bg.png");
+}
