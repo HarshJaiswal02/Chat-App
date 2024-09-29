@@ -5,20 +5,20 @@ import { generateTokenAndSetCookie } from "../utils/generateToken.js";
 const loginUser = async (req, res) => {
   try {
     console.log("Login controller");
-    const { userName, password } = req.body;
+    const { username, password } = req.body;
 
     //SignUp logic.....
-    if (!userName || !password) {
+    if (!username || !password) {
       return res.status(408).json({ error: "Some Field is empty" });
     }
 
-    const existingUser = await User.findOne({ userName });
+    const existingUser = await User.findOne({ username });
 
     console.log("User: ", existingUser);
 
     if (!existingUser) {
       return res.status(400).json({
-        error: "Invalid UserName ",
+        error: "Invalid username ",
       });
     }
 
@@ -37,7 +37,7 @@ const loginUser = async (req, res) => {
       res.status(201).json({
         _id: existingUser._id,
         fullName: existingUser.fullName,
-        userName: existingUser.userName,
+        username: existingUser.username,
         gender: existingUser.gender,
       });
     } else {
@@ -71,19 +71,19 @@ const logoutUser = async (req, res) => {
 const signupUser = async (req, res) => {
   try {
     console.log("Signup controller");
-    const { fullName, userName, gender, password, confirmPassword } = req.body;
+    const { fullName, username, gender, password, confirmPassword } = req.body;
 
     //SignUp logic.....
     if (confirmPassword !== password) {
       return res.status(408).json({ error: "Password don't matched" });
     }
 
-    const user = await User.findOne({ userName });
+    const user = await User.findOne({ username });
 
     console.log("User: ", user);
     if (user) {
       return res.status(400).json({
-        error: "Username already exists",
+        error: "username already exists",
       });
     }
 
@@ -94,10 +94,10 @@ const signupUser = async (req, res) => {
     const getpassback = await bycrpt.compare(password, hashPassword);
     console.log(getpassback);
 
-    const profilePic = `https://robohash.org/${userName}.png`;
+    const profilePic = `https://robohash.org/${username}.png`;
 
     const newUser = new User({
-      userName,
+      username,
       fullName,
       password: hashPassword,
       gender,
@@ -113,7 +113,7 @@ const signupUser = async (req, res) => {
       res.status(201).json({
         _id: newUser._id,
         fullName: newUser.fullName,
-        userName: newUser.userName,
+        username: newUser.username,
         gender: newUser.gender,
       });
     } else {
