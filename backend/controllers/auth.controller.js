@@ -72,7 +72,7 @@ const signupUser = async (req, res) => {
   try {
     console.log("Signup controller");
     const { fullName, username, gender, password, confirmPassword } = req.body;
-
+    console.log(username);
     //SignUp logic.....
     if (confirmPassword !== password) {
       return res.status(408).json({ error: "Password don't matched" });
@@ -97,7 +97,7 @@ const signupUser = async (req, res) => {
     const profilePic = `https://robohash.org/${username}.png`;
 
     const newUser = new User({
-      username,
+      username: username,
       fullName,
       password: hashPassword,
       gender,
