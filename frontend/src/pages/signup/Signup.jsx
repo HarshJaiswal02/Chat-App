@@ -244,7 +244,11 @@ const Signup = () => {
             type="submit"
             className="inline-block rounded-lg bg-gray-500 px-5 py-3 text-sm font-medium min-w-full"
           >
-            Signup
+            {loading ? (
+              <span className="loading loading-spinner"></span>
+            ) : (
+              <div className="text-white">Signup</div>
+            )}
           </button>
         </form>
       </div>

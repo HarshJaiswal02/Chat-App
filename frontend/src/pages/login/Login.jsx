@@ -1,6 +1,19 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useLogin } from "../../hooks/useLogin";
 
 const Login = () => {
+  const [input, setInput] = useState({
+    username: "",
+    password: "",
+  });
+  const { login, loading } = useLogin();
+  const handleLoginSubmit = async (e) => {
+    e.preventDefault();
+    console.log(input);
+    await login(input);
+
+  };
   return (
     <>
       <div className=" flex rounded backdrop-blur-sm bg-opacity-50 border border-gray-100 backdrop-filter">
@@ -11,17 +24,24 @@ const Login = () => {
             </h1>
           </div>
           <p>Hey, friend! Great to see you again!</p>
-          <form action="#" className="mx-auto mb-0 mt-8 max-w-md space-y-4">
+          <form
+            onSubmit={handleLoginSubmit}
+            className="mx-auto mb-0 mt-8 max-w-md space-y-4"
+          >
             <div>
               <label htmlFor="email" className="sr-only">
-                Email
+                Username
               </label>
 
               <div className="relative">
                 <input
-                  type="email"
+                  type="text"
                   className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
                   placeholder="Enter Username"
+                  value={input.username}
+                  onChange={(e) => {
+                    setInput({ ...input, username: e.target.value });
+                  }}
                 />
 
                 <span className="absolute inset-y-0 end-0 grid place-content-center px-4">
@@ -52,6 +72,10 @@ const Login = () => {
                   type="password"
                   className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
                   placeholder="Enter password"
+                  value={input.password}
+                  onChange={(e) => {
+                    setInput({ ...input, password: e.target.value });
+                  }}
                 />
 
                 <span className="absolute inset-y-0 end-0 grid place-content-center px-4">
