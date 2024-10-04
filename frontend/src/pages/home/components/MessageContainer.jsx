@@ -1,6 +1,7 @@
 import MessageInput from "../../../globalComponent/message/MessageInput";
 import Messages from "../../../globalComponent/message/Messages";
 import { TiMessages } from "react-icons/ti";
+import { useConversation } from "../../../zustand/useConversation";
 // import MessageSkeleton from "../../../globalComponent/skeleton/MessageSkeleton";
 
 const NoChatSelected = () => {
@@ -32,7 +33,8 @@ const ChatSelected = () => {
 };
 const MessageContainer = () => {
   const isNoChatSelected = true;
-  return <>{isNoChatSelected ? <NoChatSelected /> : <ChatSelected />}</>;
+  const { selectedConversation, setSelectedConversation } = useConversation();
+  return <>{!selectedConversation ? <NoChatSelected /> : <ChatSelected />}</>;
 };
 
 export default MessageContainer;

@@ -14,7 +14,7 @@ export const useLogout = () => {
         headers: { "Content-Type": "application/json" },
       });
 
-      const data = res.json();
+      const data = await res.json();
       console.log(data);
 
       if (data.error) {
@@ -23,7 +23,7 @@ export const useLogout = () => {
 
       localStorage.clear("chat-user");
       setAuthUser(null);
-      
+
     } catch (error) {
       toast.error(error.message);
     } finally {
