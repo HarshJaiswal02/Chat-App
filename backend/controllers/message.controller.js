@@ -1,7 +1,8 @@
 import Conversation from "../models/conversation.model.js";
 import Message from "../models/message.model.js";
+import { asyncHandler } from "../utils/asyncHandler.js";
 
-const receiveMessages = async (req, res) => {
+const receiveMessages = asyncHandler(async (req, res) => {
   try {
     const { id: userChattingId } = req.params;
 
@@ -15,16 +16,16 @@ const receiveMessages = async (req, res) => {
 
     if (!conversation) res.status(200).json([]);
 
-    const messages = conversation.messages;
+    const messages = conversation?.messages;
 
     res.status(200).json(messages);
   } catch (error) {
     console.log("Error in the receiveMessages Controller");
     res.status(500).json(`Internal Server error : ${error}`);
   }
-};
+});
 
-const sendMessage = async (req, res) => {
+const sendMessage = asyncHandler(async (req, res) => {
   try {
     const { id: receiverId } = req.params;
     const { message } = req.body;
@@ -48,13 +49,12 @@ const sendMessage = async (req, res) => {
       message,
     });
 
-    
     console.log(newMessage);
-    
+
     if (newMessage) {
       conversation.messages.push(newMessage._id);
     }
-    
+
     await Promise.all([conversation.save(), newMessage.save()]);
 
     res.status(201).json(newMessage);
@@ -63,5 +63,5 @@ const sendMessage = async (req, res) => {
     console.log("Error in the sendMessage Controller");
     res.status(500).json(`Internal Server error : ${error}`);
   }
-};
+});
 export { receiveMessages, sendMessage };

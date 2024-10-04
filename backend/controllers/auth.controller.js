@@ -1,8 +1,9 @@
 import bycrpt from "bcrypt";
 import User from "../models/user.model.js";
 import { generateTokenAndSetCookie } from "../utils/generateToken.js";
+import { asyncHandler } from "../utils/asyncHandler.js";
 
-const loginUser = async (req, res) => {
+const loginUser = asyncHandler(async (req, res) => {
   try {
     console.log("Login controller");
     const { username, password } = req.body;
@@ -53,9 +54,9 @@ const loginUser = async (req, res) => {
       error: `Internal Server Error ${error.message} `,
     });
   }
-};
+});
 
-const logoutUser = async (req, res) => {
+const logoutUser = asyncHandler(async (req, res) => {
   try {
     console.log("Logout controller");
     res.cookie("jwt", "", {
@@ -66,9 +67,9 @@ const logoutUser = async (req, res) => {
       message: "Logged out successfully",
     });
   } catch (error) {}
-};
+});
 
-const signupUser = async (req, res) => {
+const signupUser = asyncHandler(async (req, res) => {
   try {
     console.log("Signup controller");
     const { fullName, username, gender, password, confirmPassword } = req.body;
@@ -129,6 +130,6 @@ const signupUser = async (req, res) => {
       error: `Internal Server Error ${error.message} `,
     });
   }
-};
+});
 
 export { loginUser, signupUser, logoutUser };

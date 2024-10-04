@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { BsThreeDots } from "react-icons/bs";
 
 const useGetConversation = () => {
   const [loading, setLoading] = useState(false);

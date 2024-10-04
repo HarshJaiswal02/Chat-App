@@ -15,6 +15,8 @@ app.use(cors());
 app.use(cookieParser());
 app.use(express.json()); //Parse the incoming request with JSON payload (body-parser)
 
+
+
 app.use("/api/auth", authRoutes);
 app.use("/api/message", messageRoutes);
 app.use("/api/users", userRoutes);

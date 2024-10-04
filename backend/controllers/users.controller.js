@@ -1,6 +1,7 @@
 import User from "../models/user.model.js";
+import { asyncHandler } from "../utils/asyncHandler.js";
 
-const fetchAllUser = async (req, res) => {
+const fetchAllUser = asyncHandler(async (req, res) => {
   try {
     const loginUserId = req.user._id;
 
@@ -21,6 +22,6 @@ const fetchAllUser = async (req, res) => {
     console.log("Error in the fetchAllUser Controller");
     res.status(500).json(`Server Internal Error - fetchAllUser ${error} `);
   }
-};
+});
 
 export { fetchAllUser };

@@ -1,4 +1,3 @@
-import { BsCheckLg } from "react-icons/bs";
 import useGetConversation from "../../hooks/useGetConversation";
 import { getEmoji } from "../../utils/emoji";
 import Conversation from "./Conversation";

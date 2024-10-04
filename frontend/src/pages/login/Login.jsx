@@ -7,7 +7,7 @@ const Login = () => {
     username: "",
     password: "",
   });
-  const { login, loading } = useLogin();
+  const { login} = useLogin();
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
     console.log(input);

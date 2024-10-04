@@ -4,6 +4,8 @@ import User from "../models/user.model.js";
 const protectRoute = async (req, res, next) => {
   try {
     // console.log("Why undefine", req.cookies); //It Should be cookie's'
+    console.log("Inside server after express.json");
+    console.log(`${req.cookies.jwt}`);
     const token = req.cookies.jwt;
 
     if (!token) {
