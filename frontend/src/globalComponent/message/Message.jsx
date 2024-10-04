@@ -1,10 +1,12 @@
 import { useAuthContext } from "../../contextApis/AuthContext";
+import { extractTime } from "../../utils/extractTime";
 import { useConversation } from "../../zustand/useConversation";
 
 const Message = ({ message }) => {
   const { authUser } = useAuthContext();
 
   const { selectedConversation } = useConversation();
+  console.log(authUser);
 
   const fromMe = message?.senderId === authUser._id;
 
@@ -14,6 +16,8 @@ const Message = ({ message }) => {
   const chatClassName = fromMe ? "chat-end" : "chat-start";
 
   const bubbleBgColor = fromMe ? "bg-blue-700" : "bg-slate-600";
+
+  const chatTime = extractTime(message.createdAt);
   return (
     <div className={`chat ${chatClassName}`}>
       <div className="chat-image avatar">
@@ -26,11 +30,11 @@ const Message = ({ message }) => {
         </div>{" "}
       </div>
 
-      <div className={`chat-bubble text-white ${bubbleBgColor} `}>
+      <div className={`chat-bubble text-white ${bubbleBgColor} pb-2 `}>
         {message.message}
       </div>
       <div className="chat-footer opacity-50 text-xs flex gap-1 items-center">
-        {message.createdAt}
+        {chatTime}
       </div>
     </div>
   );

@@ -40,6 +40,7 @@ const loginUser = asyncHandler(async (req, res) => {
         fullName: existingUser.fullName,
         username: existingUser.username,
         gender: existingUser.gender,
+        profilePic: existingUser.profilePic,
       });
     } else {
       console.log("Error in login user");
