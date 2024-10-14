@@ -7,7 +7,7 @@ const protectRoute = async (req, res, next) => {
     console.log("Inside server after express.json");
     console.log(`${req.cookies.jwt}`);
     const token = req.cookies.jwt;
-
+    
     if (!token) {
       return res
         .status(401)
@@ -29,9 +29,9 @@ const protectRoute = async (req, res, next) => {
     if (!user) {
       res.status(404).json("User not found");
     }
-    // console.log(user);
+    console.log(user);
     req.user = user;
-    // console.log("Request User", req.user);
+    console.log("Request User", req.user);
     next();
   } catch (error) {
     console.log("error in protectRoute middleware");

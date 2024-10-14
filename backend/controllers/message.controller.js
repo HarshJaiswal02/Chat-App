@@ -1,5 +1,6 @@
 import Conversation from "../models/conversation.model.js";
 import Message from "../models/message.model.js";
+import { getReceiverSocketId, io } from "../socket/socket.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 
 const receiveMessages = asyncHandler(async (req, res) => {
@@ -36,7 +37,7 @@ const sendMessage = asyncHandler(async (req, res) => {
         $all: [senderId, receiverId],
       },
     });
-    console.log(conversation);
+    console.log("convo:", conversation);
     if (!conversation) {
       conversation = await Conversation.create({
         participants: [senderId, receiverId],
@@ -57,7 +58,18 @@ const sendMessage = asyncHandler(async (req, res) => {
 
     await Promise.all([conversation.save(), newMessage.save()]);
 
+    const receiverSocketId = getReceiverSocketId(receiverId);
+    console.log("SOCKET ID OF receiver", receiverSocketId);
+    if (receiverSocketId) {
+      console.log("Inside");
+      io.to(receiverSocketId).emit("newMessage", newMessage);
+      console.log(
+        `Message sent to ${receiverId} via socket ${receiverSocketId}`
+      );
+    }
+
     res.status(201).json(newMessage);
+    
     //   console.log("Params id: ", receiverId);
   } catch (error) {
     console.log("Error in the sendMessage Controller");

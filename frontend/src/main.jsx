@@ -5,12 +5,15 @@ import App from "./App.jsx";
 import "./index.css";
 import { Toaster } from "react-hot-toast";
 import { AuthContextProvider } from "./contextApis/AuthContext.jsx";
+import { SocketContextProvider } from "./contextApis/SocketContext.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>
       <AuthContextProvider>
-        <App />
+        <SocketContextProvider>
+          <App />
+        </SocketContextProvider>
       </AuthContextProvider>
     </BrowserRouter>
     <Toaster />

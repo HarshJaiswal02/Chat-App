@@ -21,7 +21,7 @@ export const useLogout = () => {
         throw new Error(data.error);
       }
 
-      localStorage.clear("chat-user");
+      sessionStorage.clear("chat-user");
       setAuthUser(null);
 
     } catch (error) {

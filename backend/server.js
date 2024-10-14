@@ -7,9 +7,10 @@ import messageRoutes from "../backend/routes/message.routes.js";
 import userRoutes from "../backend/routes/users.routes.js";
 
 import DbConnect from "./config/db.js";
+import { app, server } from "./socket/socket.js";
 
 dotenv.config();
-const app = express();
+// const app = express();
 app.use(cors());
 
 app.use(cookieParser());
@@ -25,7 +26,7 @@ const PORT = process.env.PORT || 8000;
 
 DbConnect()
   .then(() => {
-    app.listen(PORT, () => {
+    server.listen(PORT, () => {
       console.log("Server running on : ", PORT);
     });
   })

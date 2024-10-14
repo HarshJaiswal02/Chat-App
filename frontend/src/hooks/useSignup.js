@@ -45,7 +45,7 @@ const useSignup = () => {
       }
 
       //Saving the data in localStorage
-      localStorage.setItem("chat-user", JSON.stringify(data));
+      sessionStorage.setItem("chat-user", JSON.stringify(data));
 
       //context (sync the data flow)
       setAuthUser(data);

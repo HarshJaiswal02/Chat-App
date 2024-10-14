@@ -1,13 +1,20 @@
+import { useSocketContext } from "../../contextApis/SocketContext";
 import { useConversation } from "../../zustand/useConversation";
 
-const Conversation = ({ data, emoji, lastIndex }) => {
+const Conversation = ({ conversation, emoji, lastIndex }) => {
   // console.log(data);
   // console.log(emoji);
   const { selectedConversation, setSelectedConversation } = useConversation();
 
   console.log(selectedConversation);
 
-  let isSelected = selectedConversation?._id === data._id;
+  let isSelected = selectedConversation?._id === conversation ._id;
+
+  const { onlineUsers } = useSocketContext();
+  console.log(onlineUsers);
+  console.log(conversation);
+
+  const isOnline = onlineUsers?.includes(conversation._id);
 
   return (
     <>
@@ -15,12 +22,12 @@ const Conversation = ({ data, emoji, lastIndex }) => {
         className={`flex gap-2 items-center ${
           isSelected ? "" : "hover:bg-slate-600"
         } rounded p-2 py-1 cursor-pointer ${isSelected ? "bg-sky-600" : ""}`}
-        onClick={() => setSelectedConversation(data)}
+        onClick={() => setSelectedConversation(conversation)}
       >
-        <div className="avatar online">
+        <div className={`avatar ${isOnline ? "online" : ""}`}>
           <div className="w-12 rounded-full">
             <img
-              src={data.profilePic}
+              src={conversation.profilePic}
               alt="User Avatar"
               className="h-12 w-12 rounded-full"
             />
@@ -29,7 +36,7 @@ const Conversation = ({ data, emoji, lastIndex }) => {
 
         <div className="flex flex-col flex-1">
           <div className="flex gap-3 justify-between">
-            <p className="font-bold text-gray-200">{data.username}</p>
+            <p className="font-bold text-gray-200">{conversation.username}</p>
             <span className="text-xl">{emoji}</span>
           </div>
         </div>

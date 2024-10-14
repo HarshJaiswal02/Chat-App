@@ -8,11 +8,11 @@ const Message = ({ message }) => {
   const { selectedConversation } = useConversation();
   console.log(authUser);
 
-  const fromMe = message?.senderId === authUser._id;
+  const fromMe = message.senderId === authUser._id;
 
   const profilePic = fromMe
     ? authUser.profilePic
-    : selectedConversation.profilePic;
+    : selectedConversation?.profilePic;
   const chatClassName = fromMe ? "chat-end" : "chat-start";
 
   const bubbleBgColor = fromMe ? "bg-blue-700" : "bg-slate-600";

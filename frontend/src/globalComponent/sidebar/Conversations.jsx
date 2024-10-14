@@ -14,10 +14,10 @@ const Conversations = () => {
       <Conversation />
       <Conversation /> */}
 
-      {conversation.map((data, index) => (
+      {conversation.map((conversation, index) => (
         <Conversation
-          key={data._id}
-          data={data}
+          key={conversation._id}
+          conversation={conversation}
           lastIndex={index === conversation.length - 1}
           emoji={getEmoji()}
         />
